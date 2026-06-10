@@ -1,65 +1,234 @@
-import Image from "next/image";
+import Link from "next/link";
 
-export default function Home() {
+const services = [
+  { icon: "🔧", title: "الصيانة", desc: "كهرباء، سباكة، تكييف، دهانات" },
+  { icon: "🧹", title: "النظافة", desc: "منازل، شركات، بعد التشطيب" },
+  { icon: "👨‍⚕️", title: "الرعاية", desc: "كبار السن، أطفال، تمريض" },
+  { icon: "🍳", title: "الطبخ", desc: "طبخ منزلي، مناسبات" },
+  { icon: "🚚", title: "النقل", desc: "نقل أثاث، توصيل" },
+  { icon: "🛠️", title: "التركيب", desc: "أجهزة، أثاث" },
+];
+
+const stats = [
+  { value: "+500", label: "مقدم خدمة" },
+  { value: "+10,000", label: "عميل سعيد" },
+  { value: "+25", label: "مدينة" },
+];
+
+const steps = [
+  {
+    num: "01",
+    title: "حمّل التطبيق",
+    desc: "متاح على Google Play و App Store مجاناً",
+  },
+  { num: "02", title: "اختر خدمتك", desc: "تصفح الخدمات المتاحة في مدينتك" },
+  { num: "03", title: "حدد الموعد", desc: "اختر الوقت المناسب لك" },
+  { num: "04", title: "استمتع بالخدمة", desc: "مقدم الخدمة يصلك في الموعد" },
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className="bg-black text-white" dir="rtl">
+      {/* Hero */}
+      <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 relative overflow-hidden">
+        {/* الفيديو في الخلفية */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        >
+          <source src="/bg-video.mp4" type="video/mp4" />
+        </video>
+
+        {/* طبقة داكنة فوق الفيديو */}
+        <div
+          className="absolute inset-0 z-10"
+          style={{
+            background:
+              "linear-gradient(to bottom, rgba(10,26,74,0.8), rgba(0,0,0,0.9))",
+          }}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+
+        {/* المحتوى */}
+        <div className="relative z-20 flex flex-col items-center">
+          <span
+            className="text-sm font-bold px-4 py-1 rounded-full mb-6 inline-block border"
+            style={{
+              background: "#1a3a8f",
+              borderColor: "#2952cc",
+              color: "#fff",
+            }}
+          >
+            🌟 التطبيق الأول للخدمات المنزلية في مصر
+          </span>
+          <h1 className="text-5xl md:text-6xl font-black mb-4 leading-tight">
+            كل خدماتك اليومية
+            <br />
+            <span style={{ color: "#4a7fff" }}>في مكان واحد</span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-gray-400 text-lg max-w-xl mb-10">
+            NoviZone يربطك بأفضل مقدمي الخدمات المنزلية المعتمدين في مدينتك
+            بضغطة زر
           </p>
+          <div className="flex flex-wrap gap-4 justify-center mb-16">
+            <Link
+              href="/download-app"
+              className="font-bold px-8 py-4 rounded-xl transition text-lg text-white"
+              style={{ background: "#1a3a8f" }}
+            >
+              📱 Google Play
+            </Link>
+            <Link
+              href="/download-app"
+              className="font-bold px-8 py-4 rounded-xl transition text-lg"
+              style={{ background: "#fff", color: "#000" }}
+            >
+              🍎 App Store
+            </Link>
+          </div>
+          <div className="flex flex-wrap gap-12 justify-center">
+            {stats.map((s) => (
+              <div key={s.label} className="text-center">
+                <div
+                  className="text-4xl font-black"
+                  style={{ color: "#4a7fff" }}
+                >
+                  {s.value}
+                </div>
+                <div className="text-gray-400 text-sm mt-1">{s.label}</div>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      </section>
+
+      {/* Services */}
+      <section className="py-20 px-4 relative overflow-hidden">
+        {/* الفيديو في الخلفية */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover z-0"
+        >
+          <source src="/bg-video-2.mp4" type="video/mp4" />
+        </video>
+
+        {/* طبقة بيضاء فوق الفيديو */}
+        {/* <div className="absolute inset-0 z-10"
+    style={{ background: "rgba(255,255,255,0.85)" }} /> */}
+
+        {/* المحتوى */}
+        <div className="relative z-20 max-w-5xl mx-auto">
+          <h2
+            className="text-3xl font-black text-center mb-2"
+            style={{ color: "#000" }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            خدماتنا
+          </h2>
+          <p className="text-center mb-12" style={{ color: "#555" }}>
+            كل ما تحتاجه في متناول يدك
+          </p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {services.map((s) => (
+              <Link
+                href="/services"
+                key={s.title}
+                className="rounded-2xl p-6 text-center transition border-2 border-[#e0e8ff] hover:border-[#1a3a8f]"
+                style={{ background: "rgba(248,249,255,0.9)" }}
+              >
+                <div className="hover-3d">
+                  <figure className="max-w-100 rounded-2xl">
+                    <div className="text-4xl">{s.icon}</div>
+                  </figure>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+
+                <div
+                  className="font-bold text-lg mb-1"
+                  style={{ color: "#1a3a8f" }}
+                >
+                  {s.title}
+                </div>
+                <div className="text-sm" style={{ color: "#666" }}>
+                  {s.desc}
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* How it works */}
+      <section className="py-20 px-4 bg-black">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-black text-center mb-2">كيف يعمل؟</h2>
+          <p className="text-gray-400 text-center mb-12">
+            4 خطوات بسيطة للحصول على خدمتك
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {steps.map((s) => (
+              <div
+                key={s.num}
+                className="flex gap-4 items-start rounded-2xl p-6 border"
+                style={{ background: "#0a1535", borderColor: "#1a3a8f" }}
+              >
+                <span
+                  className="font-black text-2xl min-w-48"
+                  style={{ color: "#4a7fff" }}
+                >
+                  {s.num}
+                </span>
+                <div>
+                  <h3 className="font-bold text-lg mb-1 text-white">
+                    {s.title}
+                  </h3>
+                  <p className="text-gray-400 text-sm">{s.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section
+        className="py-20 px-4 text-center"
+        style={{ background: "#1a3a8f" }}
+      >
+        <h2 className="text-3xl font-black mb-4 text-white">جاهز تبدأ؟</h2>
+        <p className="mb-8 text-lg" style={{ color: "#c0d0ff" }}>
+          انضم لآلاف العملاء الراضين عن خدماتنا
+        </p>
+        <div className="flex flex-wrap gap-4 justify-center">
+          <Link
+            href="/download-app"
+            className="font-black px-8 py-4 rounded-xl transition text-lg"
+            style={{ background: "#fff", color: "#1a3a8f" }}
+          >
+            حمّل التطبيق الآن
+          </Link>
+          <Link
+            href="/download-app"
+            className="font-bold px-8 py-4 rounded-xl transition text-lg border-2 text-white"
+            style={{ borderColor: "#fff" }}
+          >
+            انضم كمقدم خدمة
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }
+
+// <div className="text-4xl mb-3">{s.icon}</div>
