@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const services = [
   { icon: "🔧", title: "الصيانة", desc: "كهرباء، سباكة، تكييف، دهانات" },
@@ -31,29 +32,28 @@ export default function HomePage() {
     <main className="bg-black text-white" dir="rtl">
       {/* Hero */}
       <section className="min-h-screen flex flex-col items-center justify-center text-center px-4 py-20 relative overflow-hidden">
-        {/* الفيديو في الخلفية */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover z-0"
-        >
-          <source src="/bg-video.mp4" type="video/mp4" />
-        </video>
+        {/* الصورة في الخلفية */}
+        <Image
+          src="/NOVI.jpg"
+          alt="background"
+          fill
+          className="object-cover z-0"
+        />
 
-        {/* طبقة داكنة فوق الفيديو */}
+        {/* طبقة داكنة فوق الصورة */}
         <div
           className="absolute inset-0 z-10"
-          style={{
-            background:
-              "linear-gradient(to bottom, rgba(10,26,74,0.8), rgba(0,0,0,0.9))",
-          }}
+          style={{ background: "rgba(10,26,74,0.6)" }}
         />
 
         {/* المحتوى */}
         <div className="relative z-20 flex flex-col items-center">
-          <span
+          {/* كودك هنا */}
+        </div>
+
+        {/* المحتوى */}
+        <div className="relative z-20 flex flex-col items-center">
+          {/* <span
             className="text-sm font-bold px-4 py-1 rounded-full mb-6 inline-block border"
             style={{
               background: "#1a3a8f",
@@ -62,11 +62,11 @@ export default function HomePage() {
             }}
           >
             🌟 التطبيق الأول للخدمات المنزلية في مصر
-          </span>
+          </span> */}
           <h1 className="text-5xl md:text-6xl font-black mb-4 leading-tight">
             كل خدماتك اليومية
             <br />
-            <span style={{ color: "#4a7fff" }}>في مكان واحد</span>
+            <span style={{ color: "black" }}>في مكان واحد</span>
           </h1>
           <p className="text-gray-400 text-lg max-w-xl mb-10">
             NoviZone يربطك بأفضل مقدمي الخدمات المنزلية المعتمدين في مدينتك
@@ -76,14 +76,14 @@ export default function HomePage() {
             <Link
               href="/download-app"
               className="font-bold px-8 py-4 rounded-xl transition text-lg text-white"
-              style={{ background: "#1a3a8f" }}
+              style={{ background: "black" }}
             >
               📱 Google Play
             </Link>
             <Link
               href="/download-app"
               className="font-bold px-8 py-4 rounded-xl transition text-lg"
-              style={{ background: "#fff", color: "#000" }}
+              style={{ background: "white", color: "#000" }}
             >
               🍎 App Store
             </Link>
@@ -93,7 +93,7 @@ export default function HomePage() {
               <div key={s.label} className="text-center">
                 <div
                   className="text-4xl font-black"
-                  style={{ color: "#4a7fff" }}
+                  style={{ color: "gold" }}
                 >
                   {s.value}
                 </div>
